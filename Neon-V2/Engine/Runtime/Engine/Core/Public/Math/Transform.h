@@ -1,0 +1,23 @@
+﻿#pragma once
+#include "pch.h"
+
+#include "Quat.h"
+#include "Vector.h"
+
+struct FTransform {
+    FQuat Rotation;
+    FVector Translation;
+    uint8_t Pad_1C[0x4];
+    FVector Scale3D;
+    uint8_t Pad_2C[0x4];
+
+    FTransform()
+        : Rotation(0, 0, 0, 1), Translation(0, 0, 0), Scale3D(1, 1, 1) {
+    }
+
+    FTransform(const FQuat& InRotation, const FVector& InTranslation, const FVector& InScale3D)
+        : Rotation(InRotation), Translation(InTranslation), Scale3D(InScale3D) {
+    }
+
+    FTransform(FVector loc, FQuat rot, FVector scale = { 1, 1, 1 }) : Translation(loc), Rotation(rot), Scale3D(scale) {}
+};
